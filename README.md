@@ -36,3 +36,5 @@ The goal of this project is to develop a special Snake game using Haskell with a
 ## Group Member
 - Name: Yu Ming Chen, PID: A59010485, Github name: allenchen0958
 - Name: Xuan Ding, PID: A16060562, Github name: dingxuan2000
+- Name: Jiayan Dong, PID: A16593051, Github name: Jiayan-Dong
+- Name: Keng-Chi Chang, PID: A53270228, Github name: KengChiChang
