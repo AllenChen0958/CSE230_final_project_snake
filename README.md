@@ -22,6 +22,10 @@ The goal of this project is to develop a special Snake game using Haskell with a
    - Snake movement and growth mechanics.
    - Apple generation and consumption.
    - Collision detection and game over conditions.
+   - Mission and Scores Achievements.
+   - Multiplayer/AI player mode where players can compete against each other or collaborate in achieving common goal.
+   - Customized snakes options where players can customize their snacks with different colors, shapes.
+   - Dynamic Environment such as moving platforms, changing landscapes, and day-night cycles.
 
 2. **Special Abilities:** Special apples that grant unique abilities or trigger in-game events.
 
