@@ -10,12 +10,11 @@ The goal of this project is to develop a special Snake game using Haskell with a
 
 2. **Special Abilities:** Introduce special apples with unique effects. When the snake consumes these special apples, it will gain abilities or trigger in-game events. These abilities could include temporary invincibility, speed boosts, new obstacles appearing, or enemies entering the game.
 
-3. **Puzzles and Mazes:** Enhance the gameplay by incorporating puzzle elements or mazes within the game. These puzzles will add complexity and require strategic thinking from the player, making the game more challenging and engaging.
+3. **User Interface:** Create an intuitive and visually appealing user interface for the game, including features like a scoreboard, game over screen, and user-friendly controls.
 
-4. **User Interface:** Create an intuitive and visually appealing user interface for the game, including features like a scoreboard, game over screen, and user-friendly controls.
+4. **Testing and Debugging:** Thoroughly test the game to identify and fix any bugs or issues that may arise during development. Ensure the game is stable and free of major defects.
 
-5. **Testing and Debugging:** Thoroughly test the game to identify and fix any bugs or issues that may arise during development. Ensure the game is stable and free of major defects.
-
+5. (optional) **Puzzles and Mazes:** Enhance the gameplay by incorporating puzzle elements or mazes within the game. These puzzles will add complexity and require strategic thinking from the player, making the game more challenging and engaging.
 ## Deliverables
 
 1. **Snake Game:** A complete Snake game implemented in Haskell with the following features:
@@ -24,18 +23,19 @@ The goal of this project is to develop a special Snake game using Haskell with a
    - Collision detection and game over conditions.
    - Mission and Scores Achievements.
    - Multiplayer/AI player mode where players can compete against each other or collaborate in achieving common goal.
-   - Customized snakes options where players can customize their snacks with different colors, shapes.
-   - Dynamic Environment such as moving platforms, changing landscapes, and day-night cycles.
 
 2. **Special Abilities:** Special apples that grant unique abilities or trigger in-game events.
 
-3. **Puzzles and Mazes:** Integrating puzzles or mazes into the game to increase complexity.
+3. **User Interface:** An intuitive user interface that includes a start screen, game over screen, and a scoreboard.
 
-4. **User Interface:** An intuitive user interface that includes a start screen, game over screen, and a scoreboard.
+4. **Documentation:** Detailed documentation explaining how to play the game and how special abilities and puzzles work.
 
-5. **Documentation:** Detailed documentation explaining how to play the game and how special abilities and puzzles work.
+5. **Testing:** Test cases and a report detailing testing procedures and results.
 
-6. **Testing:** Test cases and a report detailing testing procedures and results.
+6. **Additonal features**: Should time allow, we plan to introduce more personalized features.
+   - **Puzzles and Mazes:** Integrating puzzles or mazes into the game to increase complexity.
+   -  Customized snakes options where players can customize their snacks with different colors, shapes.
+   - Dynamic Environment such as moving platforms, changing landscapes, and day-night cycles.
 
 ## Group Member
 - Name: Yu Ming Chen, PID: A59010485, Github name: allenchen0958
