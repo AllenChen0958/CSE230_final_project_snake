@@ -55,7 +55,7 @@ The general architecture is planned as follow, we will modify the architecture t
      - `Snake`: A sequence of coordinates representing the snake's body.
      - `step`: Updates the game state based on the current state and direction of the snake.
      - `initGame`: Initializes the game with a random starting state.
-     - Other helper function: Such as `move`, `die`, `eatFood`, `nextFood`..etc, which are helper functions to handle snake movement, eating food, dying, and generating new food.
+     - Other subcompoment: Such as `move`, `die`, `eatFood`, `nextFood`..etc, which are helper functions to handle snake movement, eating food, dying, and generating new food.
 
 3. **Integration between UI and Game Logic:**
    - The UI module imports the Snake module and uses its functions to manage the game state.
