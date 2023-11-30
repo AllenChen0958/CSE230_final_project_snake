@@ -83,7 +83,7 @@ We are optimistic about meeting our goals by the deadline. Our planned achieveme
 ## If not, how will you modify your goals?
 While we are confident in our ability to meet our objectives, we are prepared for unforeseen challenges. In the unlikely event that our progress is hindered:
 - We will prioritize completing a basic version of the snake game.
-- This approach ensures that we have a functional product, which we can then build upon as time allows.
+- Try to simplify the functions of game, start from basic functions, add more interesting things if we have more time.
 
 ## Group Member
 - Name: Yu Ming Chen, PID: A59010485, Github name: allenchen0958
