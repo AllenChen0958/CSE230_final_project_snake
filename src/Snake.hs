@@ -43,6 +43,7 @@ module Snake
     targetDegree,
     targetDegree2,
     rotationProgress,
+    rotationProgress2,
     renderTick,
     camera,
     dialog,
@@ -67,6 +68,7 @@ import Control.Monad.IO.Class (liftIO)
 import Control.Monad (replicateM, when, unless)
 import Data.Foldable (toList)
 import Sound.ProteaAudio (volume)
+-- import Test.QuickCheck hiding (Fixed)
 -- import Debug.Trace (trace)
 
 
@@ -112,6 +114,7 @@ data Game = Game -- With named field
     _winner :: Int,
     _camera :: Camera,
     _rotationProgress :: Int,
+    _rotationProgress2 :: Int,
     _degree :: Double,
     _targetDegree :: Double,
     _degree2 :: Double,
@@ -199,6 +202,7 @@ sta = do
   g <- get
   locked .= False
   rotationProgress .= 0
+  rotationProgress2 .= 0
   if not (_twoPlayer g) then
     let goOn = let ss S.:> _ = S.viewr (_snake g)
                 in
@@ -531,6 +535,7 @@ initGame = do
             _degree = 0,
             _degree2 = 0,
             _rotationProgress = 24,
+            _rotationProgress2 = 24,
             _targetDegree = 0,
             _targetDegree2 = 0,
             _camera = Fixed,
@@ -594,6 +599,7 @@ initGame2p = do
             _degree = 0,
             _degree2 = 0,
             _rotationProgress = 24,
+            _rotationProgress2 = 24,
             _targetDegree = 0,
             _targetDegree2 = 0,
             _camera = Fixed,
@@ -611,3 +617,30 @@ resetGame2p g =
   if g ^. twoPlayer
     then g & dead .~ False & dead2 .~ False & dir .~ North & dir2 .~ North  & snake .~ generateInitPos 1 & snake2 .~ generateInitPos 2 & winner .~ -1  & paused .~ True -- set dir to be turnDir d
     else g
+
+
+-- Tests
+
+-- generateFoodLogic :: State Game Coord
+-- generateFoodLogic = do
+--   game <- get
+--   let snakeCoords = toList $ _snake game
+--   let availableCoords = [Coord (x, y) | x <- [0..width-1], y <- [0..height-1], Coord (x, y) `notElem` snakeCoords]
+--   let (newFoods, newGen) = runState (generateNewFoods 1 availableCoords) (_rng game)
+--   let (newFood, _, _, _) = head newFoods
+--   put $ game { _rng = newGen }
+--   return newFood
+
+-- generateFoodAndGame :: Gen (Coord, Game)
+-- generateFoodAndGame = do
+--   game <- arbitrary
+--   let food = generateFood availableCoords gen game
+--   return (food, game)
+
+-- prop_foodNotOnSnake :: Property
+-- prop_foodNotOnSnake = forAll generateFoodAndGame $ \(food, game) ->
+--   notElem food (toList $ _snake game)
+
+-- prop_foodInBounds :: Property
+-- prop_foodInBounds = forAll generateFoodAndGame $ \(Coord (x, y), _) ->
+--   x >= 0 && x < width && y >= 0 && y < height

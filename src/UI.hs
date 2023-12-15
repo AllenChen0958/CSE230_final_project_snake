@@ -99,7 +99,7 @@ import Snake
       winner,
       resetGame2p,
       dialog, updateFoodLogicType,
-      bgmVolume
+      bgmVolume, rotationProgress2
     )
 import Control.Monad (unless)
 import Control.Lens.Setter (assign)
@@ -167,8 +167,12 @@ countThread c n = do
 handleEvent :: BrickEvent Name CustomEvent -> EventM Name Game ()
 handleEvent (AppEvent (Tick n)) = do
   modify render
-  g@(Game {_rotationProgress = rp}) <- get
+  modify render2
+  g@(Game {_rotationProgress = rp, _rotationProgress2 = rp2}) <- get
   when (renderTick - 1 == rp) $ modify step
+  -- liftIO $ do
+  --   putStrLn (show rp2)
+
 handleEvent (AppEvent UpdateFood) = modify updateFoodLogic
 handleEvent (VtyEvent (V.EvKey V.KUp [])) = modify $ turn CUp
 handleEvent (VtyEvent (V.EvKey V.KDown [])) = modify $ turn CDown
@@ -184,7 +188,9 @@ handleEvent (VtyEvent (V.EvKey (V.KChar 'r') [])) = liftIO initGame >>= put
 handleEvent (VtyEvent (V.EvKey (V.KChar '1') [])) = liftIO Snake.initGame >>= put -- 1p
 handleEvent (VtyEvent (V.EvKey (V.KChar '2') [])) = liftIO Snake.initGame2p >>= put --2p
 handleEvent (VtyEvent (V.EvKey (V.KChar ' ') [])) = modify Snake.resetGame2p --reset snake to initial position
-handleEvent (VtyEvent (V.EvKey (V.KChar 'm') [])) = modify changeCamera
+handleEvent (VtyEvent (V.EvKey (V.KChar 'm') [])) = do 
+                                                      modify changeCamera
+                                                      modify changeCamera2
 handleEvent (VtyEvent (V.EvKey (V.KChar 'q') [])) = halt
 handleEvent (VtyEvent (V.EvKey (V.KChar 'c') [])) = modify changeColor
 handleEvent (VtyEvent (V.EvKey (V.KChar 'f') [])) = modify changeUpdateFoodLogic
@@ -213,26 +219,31 @@ changeColor g@(Game {_color = CYAN}) = g & color .~ WHITE
 changeColor g@(Game {_color = WHITE}) = g & color .~ BLUE
 
 changeCamera :: Game -> Game
-changeCamera g@(Game {_camera = Fixed}) = g & camera .~ Moving & bgmVolume .~ 2.0
-changeCamera g@(Game {_camera = Moving, _dir = North}) = g & camera .~ FPV & targetDegree .~ 0  & targetDegree2 .~ 0
-changeCamera g@(Game {_camera = Moving, _dir = East}) = g & camera .~ FPV & targetDegree .~ (pi/2) & targetDegree2 .~ (pi/2)
-changeCamera g@(Game {_camera = Moving, _dir = South}) = g & camera .~ FPV & targetDegree .~ pi & targetDegree2 .~ pi
-changeCamera g@(Game {_camera = Moving, _dir = West}) = g & camera .~ FPV & targetDegree .~ (-pi/2) & targetDegree2 .~ (-pi/2)
+changeCamera g@(Game {_camera = Fixed}) = g & camera .~ Moving
+changeCamera g@(Game {_camera = Moving, _dir = North}) = g & camera .~ FPV & targetDegree .~ 0  
+changeCamera g@(Game {_camera = Moving, _dir = East}) = g & camera .~ FPV & targetDegree .~ (pi/2) 
+changeCamera g@(Game {_camera = Moving, _dir = South}) = g & camera .~ FPV & targetDegree .~ pi 
+changeCamera g@(Game {_camera = Moving, _dir = West}) = g & camera .~ FPV & targetDegree .~ (-pi/2) 
 changeCamera g@(Game {_camera = FPV}) = g & camera .~ Fixed
 
-
--- changeCamera2 :: Game -> Game
--- changeCamera2 g@(Game {_camera = Fixed}) = g & camera .~ Moving
--- changeCamera2 g@(Game {_camera = Moving, _dir2 = North}) = g & camera .~ FPV & targetDegree2 .~ 0
--- changeCamera2 g@(Game {_camera = Moving, _dir2 = East}) = g & camera .~ FPV & targetDegree2 .~ (pi/2)
--- changeCamera2 g@(Game {_camera = Moving, _dir2 = South}) = g & camera .~ FPV & targetDegree2 .~ pi
--- changeCamera2 g@(Game {_camera = Moving, _dir2 = West}) = g & camera .~ FPV & targetDegree2 .~ (-pi/2)
--- changeCamera2 g@(Game {_camera = FPV}) = g & camera .~ Fixed
+changeCamera2 :: Game -> Game
+changeCamera2 g@(Game {_camera = Fixed}) = g
+changeCamera2 g@(Game {_camera = Moving, _dir2 = North}) = g & targetDegree2 .~ 0
+changeCamera2 g@(Game {_camera = Moving, _dir2 = East}) = g & targetDegree2 .~ (pi/2)
+changeCamera2 g@(Game {_camera = Moving, _dir2 = South}) = g & targetDegree2 .~ pi
+changeCamera2 g@(Game {_camera = Moving, _dir2 = West}) = g & targetDegree2 .~ (-pi/2)
+changeCamera2 g@(Game {_camera = FPV}) = g
 
 
 
 render :: Game -> Game
 render g@(Game {_degree = d, _targetDegree = td, _rotationProgress = rp}) = if renderTick - 1 == rp then g else g & degree .~ (1.0 - p) * d + p * td & rotationProgress %~ (+ 1)
+  where
+    p :: Double
+    p = fromIntegral rp / (fromIntegral renderTick - 1)
+
+render2 :: Game -> Game
+render2 g@(Game {_degree2 = d, _targetDegree2 = td, _rotationProgress2 = rp}) = if renderTick - 1 == rp then g else g & degree2 .~ (1.0 - p) * d + p * td & rotationProgress2 %~ (+ 1)
   where
     p :: Double
     p = fromIntegral rp / (fromIntegral renderTick - 1)
@@ -244,8 +255,8 @@ drawUI g =
       then
         case g ^. camera of
           Fixed  -> [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 0) <+> instr]  -- <+> instr
-          Moving -> [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 1) <+> padRight (Pad 10) (drawGrid g 2) <+> instr]  -- <+> instr
-          FPV    -> [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 0) <+> instr]  -- <+> instr
+          Moving -> [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 2) <+> padRight (Pad 10) (drawGrid g 1) <+> instr]  -- <+> instr
+          FPV    -> [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 2) <+> padRight (Pad 10) (drawGrid g 1) <+> instr]  -- <+> instr
       else
         [C.center $ padRight (Pad 5) (drawStats g) <+> padRight (Pad 10) (drawGrid g 1) <+> instr]
 
@@ -255,10 +266,10 @@ drawUI g =
 instr :: Widget Name
 instr = 
   C.hLimit 70 $
-  C.vLimit 20 $
+  C.vLimit 25 $
    withBorderStyle BS.unicodeBold $
     B.borderWithLabel (withAttr titleAttr $ str "Game Instruction") $
-        C.center $ padAll 1 $ (withAttr cameraAttr $ C.str "Press `key Up/Down/Left/Right`: move snake up/down/left/right \n\nPress `key w/s/a/d`: move snake up/down/left/right  \n\nPress `r`: reset initial game  \n\nPress `c`: change snake color \n\nPress `m`: change camera viewpoint  \n\nPress `1`: single-player game mode \n\nPress `2`: multi-player game mode  \n\nPress `f`: change food mode (good food: 🍑 \x08, bad food: 💩 \x08)   \n\nPress `q`: quit game")
+        C.center $ padAll 1 $ (withAttr cameraAttr $ C.str "Press `key Up/Down/Left/Right`: move snake up/down/left/right \n\nPress `key w/s/a/d`: move snake up/down/left/right  \n\nPress `r`: reset initial game  \n\nPress `c`: change snake color \n\nPress `m`: change camera viewpoint  \n\nPress `1`: single-player game mode \n\nPress `2`: multi-player game mode  \n\nPress `f`: change food mode (good food: 🍑 \x08, bad food: 💩 \x08)  \n\nPress `.`: Volume Up  \n\nPress `,`: Volume Down   \n\nPress `q`: quit game")
 
 
 
@@ -304,19 +315,19 @@ drawStats g =
                           B.borderWithLabel (withAttr titleAttr $ str "Score") $
                             C.hCenter $
                             padAll 1 $
-                              C.vLimit 20 $ vBox [mid2, midFixed, mid3]
+                              C.vLimit 20 $ vBox [mid2, midFixed, midV, mid3]
           Moving -> C.hLimit 30 $
                           withBorderStyle BS.unicodeBold $
                             B.borderWithLabel (withAttr titleAttr $ str "Score") $
                               C.hCenter $
                               padAll 1 $
-                                C.vLimit 20 $ vBox [mid2, midMoved, mid3]
+                                C.vLimit 20 $ vBox [mid2, midMoved, midV, mid3]
           FPV    -> C.hLimit 30 $
                         withBorderStyle BS.unicodeBold $
                           B.borderWithLabel (withAttr titleAttr $ str "Score") $
                             C.hCenter $
                             padAll 1 $
-                              C.vLimit 20 $ vBox [mid2, midFPV, mid3]
+                              C.vLimit 20 $ vBox [mid2, midFPV, midV, mid3]
     else
       case g ^. camera of
            Fixed  ->  C.hLimit 30 $
@@ -324,19 +335,19 @@ drawStats g =
                           B.borderWithLabel (withAttr titleAttr $ str "Score") $
                             C.hCenter $
                             padAll 1 $
-                              C.vLimit 10 $ vBox [mid1, midFixed, mid4]
+                              C.vLimit 10 $ vBox [mid1, midFixed, midV, mid4]
            Moving ->  C.hLimit 30 $
                         withBorderStyle BS.unicodeBold $
                           B.borderWithLabel (withAttr titleAttr $ str "Score") $
                             C.hCenter $
                             padAll 1 $
-                              C.vLimit 10 $ vBox [mid1, midMoved, mid4]
+                              C.vLimit 10 $ vBox [mid1, midMoved, midV, mid4]
            FPV    -> C.hLimit 30 $
                       withBorderStyle BS.unicodeBold $
                         B.borderWithLabel (withAttr titleAttr $ str "Score") $
                           C.hCenter $
                           padAll 1 $
-                            C.vLimit 10 $ vBox [mid1, midFPV, mid4]
+                            C.vLimit 10 $ vBox [mid1, midFPV, midV, mid4]
   where
               mid1 = C.center $ drawScore (g ^. score)
               mid2 = C.center $ drawPlayer g
@@ -345,6 +356,7 @@ drawStats g =
               midFixed = drawCameraMode Fixed
               midMoved = drawCameraMode Moving
               midFPV = drawCameraMode FPV
+              midV = drawVolumn
 
 
 
@@ -364,6 +376,9 @@ drawWinner g
 
 drawScore :: Int -> Widget Name
 drawScore n = withAttr titleAttr $ str $ show n
+
+drawVolumn :: Widget Name
+drawVolumn = (withAttr volumeUpAttr $ C.hCenter $ (cf '.' )) <+> str "  " <+> (withAttr volumeDownAttr $ C.hCenter $ (cf ','))
           
 
 drawCameraMode :: Camera -> Widget Name
@@ -456,6 +471,9 @@ cw = str "  "
 cf :: Char -> Widget Name
 cf 'a' = str "🍑 \x08"
 cf 'b' = str "💩 \x08"
+cf ',' = str "🔊➕  \x08\x08"
+cf '.' = str "🔊➖  \x08\x08"
+
 
 theMap :: AttrMap
 theMap =
@@ -463,7 +481,7 @@ theMap =
     V.defAttr
     [ (snakeAttr, V.blue `on` V.blue),
       (snake2Attr, V.green `on` V.green),
-      (foodAttr, V.red `on` V.red),
+      (foodAttr, fg V.red),
       (gameOverAttr, fg V.red `V.withStyle` V.bold),
       (snakeAttrMagenta, V.magenta `on` V.magenta),
       (snakeAttrCyan, V.cyan `on` V.cyan),
@@ -479,12 +497,13 @@ theMap =
       (D.dialogAttr, V.white `on` V.blue),
       (D.buttonAttr, V.black `on` V.white),
       (D.buttonSelectedAttr, fg V.yellow),
-      (foodAttr, fg V.red)
+      (volumeDownAttr, fg V.black `V.withStyle` V.bold),
+      (volumeUpAttr, fg V.black `V.withStyle` V.bold)
     ]
 
 
 
-snakeAttr, snakeHeadAttr, snake2Attr, emptyAttr, gameOverAttr, cameraAttr, foodAttr :: AttrName
+snakeAttr, snakeHeadAttr, snake2Attr, emptyAttr, gameOverAttr, cameraAttr, foodAttr, volumeDownAttr, volumeUpAttr :: AttrName
 snakeAttr = attrName "snakeAttr"
 snake2Attr = attrName "snake2Attr" -- player2 snake
 snakeAttrMagenta = attrName "snakeAttrMagenta"
@@ -497,4 +516,7 @@ gameOverAttr = attrName "gameOver"
 cameraAttr = attrName "cameraAttr"
 titleAttr = attrName "titleAttr"
 foodAttr = attrName "foodAttr"
+
+volumeDownAttr = attrName "volumeDownAttr"
+volumeUpAttr = attrName "volumeUpAttr"
 

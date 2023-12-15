@@ -23,6 +23,8 @@ executable snake
                      , vty
                      , vty-unix
                      , text
+                     , process
                      , proteaaudio
                      , bytestring 
                      , filepath
+
