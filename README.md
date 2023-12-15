@@ -9,7 +9,7 @@
    - Press 1: single-player game mode; Press 2: multi-player game mode  
    - Press f: change food mode (good food: 🍑 , bad food: 💩 )   
    - Press `q`: quit game"
-   - Press `+` / `-` to adjust the volume
+   - Press `,` / `.` to adjust the volume
 
 ## Features
 
@@ -33,13 +33,13 @@ The goal of this project is to develop a special Snake game using Haskell with a
 
 1. **Haskell Snake Game Implementation:** Develop a Snake game using Haskell that includes the core gameplay mechanics, such as snake movement, apple generation, and collision detection.
 
-2. **Special Abilities:** Introduce special apples with unique effects. When the snake consumes these special apples, it will gain abilities or trigger in-game events. These abilities could include temporary invincibility, speed boosts, new obstacles appearing, or enemies entering the game.
+2. **Special Food:** Introduce special apples with different points. When the snake consumes these special apples, it will give different scores.
+3. 
+4. **User Interface:** Create an intuitive and visually appealing user interface for the game, including features like a scoreboard, game over screen, and user-friendly controls.
 
-3. **User Interface:** Create an intuitive and visually appealing user interface for the game, including features like a scoreboard, game over screen, and user-friendly controls.
+5. **Two player:** Use two player mode to play with friends. In this mode, the snake will not be killed by themselves when hit their body, but the snake will die when hit opponent's body. 
 
-4. **Testing and Debugging:** Thoroughly test the game to identify and fix any bugs or issues that may arise during development. Ensure the game is stable and free of major defects.
-
-5. (optional) **Puzzles and Mazes:** Enhance the gameplay by incorporating puzzle elements or mazes within the game. These puzzles will add complexity and require strategic thinking from the player, making the game more challenging and engaging.
+6. (optional) **Puzzles and Mazes:** Enhance the gameplay by incorporating puzzle elements or mazes within the game. These puzzles will add complexity and require strategic thinking from the player, making the game more challenging and engaging.
 ## Deliverables
 
 1. **Snake Game:** A complete Snake game implemented in Haskell with the following features:
