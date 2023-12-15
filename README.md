@@ -55,7 +55,7 @@ The goal of this project is to develop a special Snake game using Haskell with a
 
 4. **Documentation:** Detailed documentation explaining how to play the game and how special abilities and puzzles work.
 
-5. **Testing:** Test cases and a report detailing testing procedures and results.
+5. **Testing:** Some simple test cases. Since this is an UI-based application, so we will focus on manually testing.
 
 6. **Additonal features**: Should time allow, we plan to introduce more personalized features.
    - **Puzzles and Mazes:** Integrating puzzles or mazes into the game to increase complexity.
