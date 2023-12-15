@@ -13,13 +13,13 @@
 ## Features
 
 ### Multiple food types 🍑 💩; fixed, random, & multiple food modes 🍽️
-![food](screenshots/snake-food.gif|width=500)
+<img src="screenshots/snake-food.gif" alt="food" width="500">
 
 ### Fixed camera 📸; moving camera mode 📹; FPV camera mode 🎥
-![camera](screenshots/snake-camera.gif|width=500)
+<img src="screenshots/snake-camera.gif" alt="camera" width="500">
 
 ### Single 💁 & two 👫 player mode; with different cameras angles 😎
-![two-player](screenshots/snake-two-player.gif|width=500)
+<img src="screenshots/snake-two-player.gif" alt="two-player" width="500">
 
 
 
