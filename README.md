@@ -1,4 +1,4 @@
-# Project Proposal: Haskell Snake Game with Special Abilities and Puzzles
+# Haskell Snake Game with Special Abilities and Puzzles
 
 ## How to play
    - Use `cabal run` to start the game in terminal.
@@ -9,6 +9,7 @@
    - Press 1: single-player game mode; Press 2: multi-player game mode  
    - Press f: change food mode (good food: 🍑 , bad food: 💩 )   
    - Press `q`: quit game"
+   - Press `+` / `-` to adjust the volume
 
 ## Features
 
