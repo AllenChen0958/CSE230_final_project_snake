@@ -10,6 +10,19 @@
    - Press f: change food mode (good food: 🍑 , bad food: 💩 )   
    - Press `q`: quit game"
 
+## Features
+
+### Multiple food types 🍑 💩; fixed, random, & multiple food modes 🍽️
+<img src="screenshots/snake-food.gif" alt="food" width="500">
+
+### Fixed camera 📸; moving camera mode 📹; FPV camera mode 🎥
+<img src="screenshots/snake-camera.gif" alt="camera" width="500">
+
+### Single 💁 & two 👫 player mode; with different cameras angles 😎
+<img src="screenshots/snake-two-player.gif" alt="two-player" width="700">
+
+
+
 # Milestone1
 ## Project Overview
 
