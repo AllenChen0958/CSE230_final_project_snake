@@ -1,5 +1,15 @@
 # Project Proposal: Haskell Snake Game with Special Abilities and Puzzles
 
+## How to play
+   - Use `cabal run` to start the game in terminal.
+   - Press key Up/Down/Left/Right` to move snake in single player mode. Press w/s/a/d to move second snake in the two player mode.
+   - Press r: reset initial game  
+   - Press c: change snake color
+   - Press m: change camera viewpoint.
+   - Press 1: single-player game mode; Press 2: multi-player game mode  
+   - Press f: change food mode (good food: 🍑 , bad food: 💩 )   
+   - Press `q`: quit game"
+
 # Milestone1
 ## Project Overview
 
