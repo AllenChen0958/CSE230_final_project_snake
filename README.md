@@ -19,7 +19,7 @@
 <img src="screenshots/snake-camera.gif" alt="camera" width="500">
 
 ### Single 💁 & two 👫 player mode; with different cameras angles 😎
-<img src="screenshots/snake-two-player.gif" alt="two-player" width="500">
+<img src="screenshots/snake-two-player.gif" alt="two-player" width="700">
 
 
 
