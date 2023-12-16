@@ -58,7 +58,6 @@ import Data.Sequence (Seq)
 import qualified Data.Sequence as S
 import qualified Graphics.Vty as V
 import Graphics.Vty.Platform.Unix (mkVty)
-import Linear.V2 (V2 (..))
 import Snake
     ( Command(..),
       Coord(..),
