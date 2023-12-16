@@ -48,7 +48,8 @@ module Snake
     camera,
     dialog,
     updateFoodLogicType,
-    bgmVolume
+    bgmVolume,
+    nextHead
   )
 where
 
@@ -61,17 +62,12 @@ import Control.Monad.Trans.Cont (reset)
 import qualified Brick.Widgets.Dialog as D
 import qualified Brick.Widgets.Center as C
 import qualified Brick.Widgets.Core as C
-import Linear.V2 (V2 (..), _x, _y)
 import System.Random (Random(..), newStdGen, RandomGen, randomRs, randomRIO, StdGen)
 import Data.Maybe (mapMaybe)
 import Control.Monad.IO.Class (liftIO)
 import Control.Monad (replicateM, when, unless)
 import Data.Foldable (toList)
 import Sound.ProteaAudio (volume)
--- import Test.QuickCheck hiding (Fixed)
--- import Debug.Trace (trace)
-
-
 
 -- Types
 
@@ -125,7 +121,6 @@ data Game = Game -- With named field
     _rng :: StdGen, -- for MultiFood
     _bgmVolume :: Float
   }
-
 data Options = Red | Blue | Green deriving (Show)
 
 data Name =

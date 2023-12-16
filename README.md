@@ -1,7 +1,8 @@
 # Haskell Snake Game with Special Abilities and Puzzles
 
 ## How to play
-   - Use `cabal run` to start the game in terminal.
+   - Use `cabal run snake` to start the game in terminal. 
+     (On Linux you may need to install the 3rd party library for bgm: `sudo apt install libpulse-dev`)
    - Press key Up/Down/Left/Right` to move snake in single player mode. Press w/s/a/d to move second snake in the two player mode.
    - Press r: reset initial game  
    - Press c: change snake color
@@ -55,7 +56,7 @@ The goal of this project is to develop a special Snake game using Haskell with a
 
 4. **Documentation:** Detailed documentation explaining how to play the game and how special abilities and puzzles work.
 
-5. **Testing:** Some simple test cases. Since this is an UI-based application, so we will focus on manually testing.
+5. **Testing:** Test cases by QuickTest. randomly generate a random walk game to test whether the various functions apply to game have outputs meet expectations. Since this is an UI-based application, so we also focus on manually testing. Use `cabal run test` to launch unit tests.
 
 6. **Additonal features**: Should time allow, we plan to introduce more personalized features.
    - **Puzzles and Mazes:** Integrating puzzles or mazes into the game to increase complexity.
