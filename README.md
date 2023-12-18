@@ -113,13 +113,14 @@ While we are confident in our ability to meet our objectives, we are prepared fo
 ## Acknowledgments
 Our work is an extension and refinement of the code available in the public repository: [Sam Tay's Snake Game](https://github.com/samtay/snake). 
 We've introduced several enhancements and new features, including:
-- Revamping the original code to enhance team collaboration efficiency.
+- Refactoring the original code to enhance team collaboration efficiency.
 - Beautifying the user interface and incorporating an instructions panel.
 - Introducing various food modes, altering food types and icons.
 - Implementing multiple camera viewpoints, such as First Person View (FPV) and a fixed camera perspective.
 - Launching a multiplayer mode with separate windows tailored for different camera views.
 - Incorporating background music to enrich the gaming experience.
 - Developing and adding test cases for the game.
+  
 While making these improvements, we have preserved the original file structure and the core concept of the snake game from the repository.
 
 ## Group Member
