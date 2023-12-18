@@ -111,18 +111,20 @@ While we are confident in our ability to meet our objectives, we are prepared fo
 - Try to simplify the functions of game, start from basic functions, add more interesting things if we have more time.
 
 ## Acknowledgments
-Our work is an extension and refinement of the code available in the public repository: [Sam Tay's Snake Game](https://github.com/samtay/snake). 
-We've introduced several enhancements and new features, including:
-- Refactoring the original code to enhance team collaboration efficiency.
-- Beautifying the user interface and incorporating an instructions panel.
-- Introducing various food modes, altering food types and icons.
-- Implementing multiple camera viewpoints, such as First Person View (FPV) and a fixed camera perspective.
-- Launching a multiplayer mode with separate windows tailored for different camera views.
-- Incorporating background music to enrich the gaming experience.
-- Developing and adding test cases for the game.
-  
-While making these improvements, we have preserved the original file structure and the core concept of the snake game from the repository.
+Basically all the code in this project was developed by our team members. Before writing the entire project, we were inspired by [a simple snake game](https://github.com/samtay/snake) available in the Github repository. We have only minimally referenced how to use the brick library to implement user interaction (about 10 lines of code in UI.hs) and the need to use a data type to store the current state of the game and continue the game (about 15 lines of code in Snake.hs).
 
+The above is only about 2% of the total code length. It is also worth noting that the referenced code is a code that has been deprecated (cannot be compiled), and uses unnecessary Monad Transformer, while our code is all based on the State introduced in the class.
+
+We've introduced a number of original new features, including:
+- Design a more user-friendly user interface and incorporating an instructions panel. Users can switch modes or adjust the volume according to this interface.
+- Introducing various foods and food generation modes, changing food types and icons (using emojis).
+- Implementing the separation of game rendering coordinates and actual coordinates, allowing different cameras to be implemented through relative coordinate functions.
+- Implementing multiple camera viewpoints: Fixed camera, Moving camera, and First Person View (FPV) camera. Introduced sub step rendering to show the rotation in the FPV camera.
+- Supporting single-player mode and two-player battle mode with different winning conditions.
+- Launching a multiplayer mode with separate windows tailored for different camera views. This mode supports simultaneous rendering of multiple different camera views.
+- Incorporating background music to enrich the gaming experience.
+- Developing and adding test cases for the game. Test code can generate a game in a random state to test various functions and features.
+  
 ## Group Member
 - Name: Yu Ming Chen, PID: A59010485, Github name: allenchen0958
 - Name: Xuan Ding, PID: A16060562, Github name: dingxuan2000
