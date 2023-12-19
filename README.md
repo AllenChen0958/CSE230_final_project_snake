@@ -122,7 +122,7 @@ We've introduced a number of original new features, including:
 - Implementing multiple camera viewpoints: Fixed camera, Moving camera, and First Person View (FPV) camera. Introduced sub step rendering to show the rotation in the FPV camera.
 - Supporting single-player mode and two-player battle mode with different winning conditions.
 - Launching a multiplayer mode with separate windows tailored for different camera views. This mode supports simultaneous rendering of multiple different camera views.
-- Incorporating background music to enrich the gaming experience.
+- Incorporating background music to enrich the gaming experience. [BGM Source](https://youtu.be/FpDWpX9luCQ?si=c0wOqCS-2ZlbA6Ct)
 - Developing and adding test cases for the game. Test code can generate a game in a random state to test various functions and features.
   
 ## Group Member
